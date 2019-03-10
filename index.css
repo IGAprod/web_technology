@@ -1,7 +1,7 @@
 
 html{
 	overflow:hidden;
-	background: #d9d9d9;
+	background: #efeff5;
 	height: 100%;
 	margin: 0;
 }
@@ -16,51 +16,40 @@ body{
 	display:block;
 }
 
-element.style{
-	display: inline-block;
-}
-
-.navcont{
-	width:100%
-	text-align: left;
-	white-space: nowrap;
-}
-
 .head{
 	display: none;
 }
 
 h5{
-	position: absolute;	
+	position: absolute;
 	margin-top: -20px;
 	margin-left: 430px;
 	margin-right: 0px;
 }
 
 .wall{
-	
+
 	max-width: 1044px;
 	height: 901px;
 	min-height: 0px;
 	margin: 36px auto 0 auto;
-	
+
 	border-style: solid;
-	border-color: #9ce;
+	border-color: #b0b0cf;
 	border-width: 0 8px 0 8px;
-	
-	background: #a6a6a6;	
+	background: #cce6ff;
 }
 
 .headOfWall{
 	position: relative;
-	
-	background: #9ce;
+
+	background: #b0b0cf;
 	display: block;
-	
+
 	margin-top: 0px;
 	margin-left: 0px;
 	margin-right: 0px;
-	height: 46px;	
+	height: 46px;
 }
 
 .headContent{
@@ -69,12 +58,12 @@ h5{
 	white-space:  nowrap;
 	padding-left: 40px;
 	box-sizing: border-box;
-    line-height: 46px;
+  line-height: 46px;
 }
 
 .newGame{
 	display: inline-block;
-	min-width: 340px;	
+	min-width: 340px;
 }
 
 .newGame button:not([disabled]){
@@ -84,7 +73,7 @@ h5{
 .createNewGame{
 	min-width: 140px;
 	box-sizing: border-box;
-	
+
 	font: inherit;
 	line-height: 1.4;
 	color: inherit;
@@ -94,7 +83,6 @@ h5{
 	outline: none;
 	display: inline-block;
 	background-color: #ffffff;
-	-webkit-appearance: button;
 }
 
 .gameMode{
@@ -104,4 +92,41 @@ h5{
 	line-height: normal;
 }
 
+.tables{
+	/*position: relative;*/
+	width: 100%;
+	height: 855px;
+}
 
+.selectGameDiv{
+	width: 70%;
+	height: 100%;
+	float: left;
+}
+
+.playersOnline{
+	width: 30%;
+	height: 100%;
+	float: right;
+}
+
+.playersTable{
+	width: 100%;
+	height: 95%;
+	background-color: #ffffff;
+}
+
+.selectGame{
+	width: 100%;
+	height: 95%;
+}
+
+.table{
+	border: 0;
+	text-align: center;
+	width: 100%;
+	background-color: #ffffff;
+}
+/*.select:before{
+	cursor: pointer;
+}

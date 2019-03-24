@@ -15,7 +15,6 @@ var selectedChecker;
 var selectedCheckerIndex;
 var mustAttack = false;
 
-
 class square{
 
   constructor(square,X,Y,index){
@@ -143,7 +142,7 @@ for(var i = 8; i < 12; i++){
 for(var i = 0; i < 4; i++){
   b_checker[i] = new checker(black_checker_class[i],"black",40 + i*2);
   b_checker[i].setCoordinate();
-  all_checkers[index] = w_checker[i];
+  all_checkers[index] = b_checker[i];
   index++;
     console.log(b_checker[i].getX());
 //  console.log(w_checker[i].getX());
@@ -179,12 +178,24 @@ var moveUpRight = 9;
 
 function showMoves(checkerId) {
 
+console.log('KIRA');
+  for(var s = 0; s < all_checkers.length; s++){
+      console.log(all_checkers[s].id);
+  }
+console.log('KIRA ssaasa');
+for(var s = 0; s < all_checkers.length; s++){
+    console.log(all_checkers[s].onSquare);
+}
+console.log('KIRA ssaasa');
+
   var mark = false;
   mustAttack = false;
   console.log('dfsjklsljkdf');
-  if(selectedChecker){
-    highlightMoves(selectedChecker);
+  if(selectedChecker == checkerId){
+  //  highlightMoves(selectedChecker);
+  return;
   }
+  clearTable();
 console.log('d332324432324324423234');
   selectedChecker = checkerId;
   var i;
@@ -193,6 +204,7 @@ console.log('d332324432324324423234');
         i = j;
         selectedCheckerIndex = i;
         mark = true;
+        console.log("zdes");
     }
 
     var downLeft = -9;
@@ -201,30 +213,109 @@ console.log('d332324432324324423234');
     var upRight = 9;
   }
   console.log('sssssssssssssssssssssss');
-  checkMoves(i);
+  inputMoves(i);
+  checkMvs(all_checkers[i].onSquare);
   highlightMoves(selectedChecker);
 
 }
 
-function checkMoves(index){
 
+function inputMoves(index){
+
+  console.log(index);
   console.log(all_checkers[index].onSquare);
-  moveDownLeft = all_checkers[index].onSquare- 9;
+  moveDownLeft = all_checkers[index].onSquare -9;
   moveDownRight = all_checkers[index].onSquare - 7;
   moveUpLeft =  all_checkers[index].onSquare + 7;
   moveUpRight = all_checkers[index].onSquare + 9;
 }
 
 
-function highlightMoves(selectedChecker){
-  console.log('dfsjklsljkdf');
-  console.log(moveDownLeft);
-  block[moveDownLeft].id.style.background = "#704923";
-  block[moveDownRight].id.style.background = "#704923";
-  block[moveUpLeft].id.style.background = "#704923";
-  block[moveUpRight].id.style.background = "#704923";
+var blockMoveDown = [0,1,2,3,4,5,6,7];
+var blockMoveUp = [56,57,58,59,60,61,62,63];
+var blockMoveLeft = [0,8,16,24,32,40,48,56];
+var blockMoveRight = [7,15,23,31,39,47,55,63];
+
+var upLeftBool = true;
+var upRightBool = true;
+var downLeftBool = true;
+var downRightBool = true;
+
+function checkMvs(index){
+  console.log('AAAAAAAAAAAAAAAAAAAAAAAAA');
+  console.log(index);
+
+  for(var i = 0; i < blockMoveDown.length; i++){
+    if(index == blockMoveDown[i]){
+      downLeftBool = false;
+      downRightBool = false;
+    }
+  }
+
+  for(var i = 0; i < blockMoveUp.length; i++){
+    if(index == blockMoveUp[i]){
+      upLeftBool = false;
+      upRightBool = false;
+    }
+  }
+
+  for(var i = 0; i < blockMoveLeft.length; i++){
+    if(index == blockMoveLeft[i]){
+      upLeftBool = false;
+      downLeftBool = false;
+    }
+  }
+
+  for(var i = 0; i < blockMoveRight.length; i++){
+    if(index == blockMoveRight[i]){
+      upRightBool = false;
+      downRightBool = false;
+    }
+  }
 }
 
+function highlightMoves(selectedChecker){
+  console.log('LKJFDSLJKSDFLJKSDFLJKFSDJLKFSD');
+//  console.log(moveDownLeft);
+  console.log(downLeftBool + '   downLeft');
+  console.log(downRightBool + '   downRight');
+  console.log(upLeftBool + '   upLeft');
+  console.log(upRightBool + '  upRight');
+
+  if(downLeftBool) block[moveDownLeft].id.style.background = "#704923";
+  if(downRightBool) block[moveDownRight].id.style.background = "#704923";
+  if(upLeftBool) block[moveUpLeft].id.style.background = "#704923";
+  if(upRightBool) block[moveUpRight].id.style.background = "#704923";
+
+  upLeftBool = true;
+  upRightBool = true;
+  downLeftBool = true;
+  downRightBool = true;
+
+}
+
+function clearTable(){
+  var sum = -1;
+  var check = false;
+  for(var i = 0; i < block.length; i++){
+    if(check == false){
+      if(i % 2 == 0){ block[i].id.style.background = "#F0D2B4";sum++;}
+      else { block[i].id.style.background = "#BA7A3A"; sum++; }
+    }
+
+    if(check== true){
+      if(i % 2 != 0){ block[i].id.style.background = "#F0D2B4";sum++;}
+      else { block[i].id.style.background = "#BA7A3A"; sum++; }
+    }
+
+    if(sum == 7){
+      if(check == true){
+        check= false;
+      }else {check= true;}
+      sum = -1;
+    }
+  }
+}
 
 /*
 for(var i = 0; i < 64; i++){

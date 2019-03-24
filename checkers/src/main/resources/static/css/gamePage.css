@@ -1,0 +1,134 @@
+
+html{
+	overflow:hidden;
+	background: #efeff5;
+	height: 100%;
+	margin: 0;
+}
+
+html,body{
+	height:100%;
+	padding: 0;
+	margin: 0;
+}
+
+body{
+	display:block;
+}
+
+.head{
+	display: none;
+}
+
+.wall{
+
+	max-width: 1044px;
+	height: 740px;
+	min-height: 0px;
+	margin: 36px auto 0 auto;
+	background: #b0b0cf;
+}
+
+.gameTable{
+	width: 70%;
+	height: 100%;
+	float: left;
+}
+
+.gameChat{
+	width: 30%;
+	height: 100%;
+	float: right;
+	background-color: #cce6ff;
+}
+
+.checkerTable{
+	padding-top: 50px;
+}
+
+.table{
+	position: relative;
+	width: 640px;
+	height: 640px;
+	margin: 0 auto;
+}
+
+.square{
+	float: left;
+	width: 80px;
+	height: 80px;
+}
+
+.white_square{
+	background-color:#F0D2B4;
+}
+
+.black_square{
+	background-color:#BA7A3A;
+}
+
+.clear_float{
+	clear: both;
+}
+
+.checker{
+	top: 10px;
+	left: 10px;
+	width: 54px;
+	height: 54px;
+	border-radius: 50%;
+	position: absolute;
+	border: 4px solid white;
+	cursor: pointer;
+}
+
+.white_checker{
+	background-color: #ccc;
+}
+
+.black_checker{
+	background-color: #000000;
+}
+
+.roles{
+	padding-top: 50px;
+	width: 100%;
+	height: 160px;
+}
+
+.white_player{
+	width: inherit;
+	height: 50%;
+	background-color: #ccc;
+	color: #000000;
+}
+
+.black_player{
+	width: inherit;
+	height: 50%;
+	background-color: #000000;
+	color: #ccc;
+}
+
+.name{
+	margin: auto;
+}
+
+.chatLogs{
+	width: 95%;
+	height: 460px;
+	margin: auto;
+	background-color:  #ffffff;
+}
+
+.inputMsg{
+	width: 100%;
+	height: 80px;
+	padding-top: 460px;
+}
+
+input{
+	width: 100%;
+	border: none;
+	size: 40;
+}

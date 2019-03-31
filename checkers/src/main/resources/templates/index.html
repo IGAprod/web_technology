@@ -23,12 +23,12 @@
 
 			<div class = "tables">
 				<div class = "selectGameDiv">
-					<select  multiple class = "selectGame">
-						<option value = "1">Игра 1</option>
-						<option value = "2">Игра 2</option>
-						<option value = "3">Игра 3</option>
-						<option value = "4">Игра 4</option>
-						<option value = "5">Игра 5</option>
+					<select  multiple class = "selectGame" onchange="window.location.href=this.options[this.selectedIndex].value">
+						<option value = "http://localhost:8080/game">Игра 1</a></option>
+						<option value = "http://localhost:8080/game">Игра 2</a></option>
+						<option value = "http://localhost:8080/game">Игра 3</a></option>
+						<option value = "http://localhost:8080/game">Игра 4</a></option>
+						<option value = "http://localhost:8080/game">Игра 5</a></option>
 					</select>
 				</div>
 				<div class = "playersOnline">

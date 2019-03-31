@@ -14,27 +14,41 @@ var sizeOfSquare = 80;
 var selectedChecker;
 var selectedCheckerIndex;
 var mustAttack = false;
+var moveSide = 'white';
 
 class square{
 
-  constructor(square,X,Y,index){
+  constructor(square,x,y,index){
     this.id = square;
-    this.scoordX = X;
-    this.scoordY = Y;
+    this.scoordX = x;
+    this.scoordY = y;
     this.index = index;
+    this.ocupid = false;
+    this.checkerId = undefined;
+    this.id.onclick = function(){
+		  makeMove(index);
+	  }
   }
 
   get id() {return this._id;}
   set id(value) { this._id = value;}
 
   get scoordX(){ return this._scoordX;}
-  set scoordX(XX){ this._scoordX = XX;}
+  set scoordX(value){ this._scoordX = value;}
 
-  get scroodY(){ return this._scoordY;}
-  set scoordX(YY){ this._scoordY = YY;}
+//  get scoordX(){ return this._scoordX;}
+//
+  get scoordY(){ return this._scoordY;}
+  set scoordY(value){ this._scoordY = value;}
 
   get index(){ return this._index;}
   set index(index){ this._index = index;}
+
+  get ocupid() {return this._ocupid;}
+  set ocupid(value) { this._ocupid= value;}
+
+  get checkerId() {return this._checkerId;}
+  set checkerId(value) { this._checkerId= value;}
 
   setSquareCoordinate(x,y){
     scoordX = x;
@@ -110,6 +124,9 @@ class checker{
 
 for(var i = 0; i < 64; i++){
   block[i] = new square(square_class[i],(i%8)*80,(Math.floor(i/8)*80),i);
+//  console.log('/////////////////////////////');
+//  console.log(block[i].scroodY);
+//    console.log('/////////////////////////////');
 //  console.log(block[i].getX());
 }
 
@@ -117,7 +134,10 @@ for(var i = 0; i < 4; i++){
   w_checker[i] = new checker(white_checker_class[i],"white",i*2,square);
   w_checker[i].setCoordinate();
   all_checkers[index] = w_checker[i];
+  block[i*2].ocupid = true;
+  block[i*2].checkerId = w_checker[i];
   index++;
+
     console.log(w_checker[i].getX());
 //  console.log(w_checker[i].getX());
 }
@@ -126,6 +146,8 @@ for(var i = 4; i < 8; i++){
   w_checker[i] = new checker(white_checker_class[i],"white",i*2 + 1,square);
   w_checker[i].setCoordinate();
   all_checkers[index] = w_checker[i];
+  block[i*2 + 1].ocupid = true;
+  block[i*2 + 1].checkerId = w_checker[i];
   index++;
   console.log(w_checker[i].getX());
 }
@@ -134,6 +156,8 @@ for(var i = 8; i < 12; i++){
   w_checker[i] = new checker(white_checker_class[i],"white",i*2,square);
   w_checker[i].setCoordinate();
   all_checkers[index] = w_checker[i];
+  block[i*2].ocupid = true;
+  block[i*2].checkerId = w_checker[i];
   index++;
     console.log(w_checker[i].getX());
 //  console.log(w_checker[i].getX());
@@ -143,6 +167,8 @@ for(var i = 0; i < 4; i++){
   b_checker[i] = new checker(black_checker_class[i],"black",40 + i*2);
   b_checker[i].setCoordinate();
   all_checkers[index] = b_checker[i];
+  block[40 + i*2].ocupid = true;
+  block[40 + i*2].checkerId = b_checker[i];
   index++;
     console.log(b_checker[i].getX());
 //  console.log(w_checker[i].getX());
@@ -152,6 +178,8 @@ for(var i = 4; i < 8; i++){
   b_checker[i] = new checker(black_checker_class[i],"black",40 + i*2 + 1);
   b_checker[i].setCoordinate();
   all_checkers[index] = b_checker[i];
+  block[40 + i*2 + 1].ocupid = true;
+  block[40 + i*2 + 1].checkerId = b_checker[i];
   index++;
     console.log(b_checker[i].getX());
 }
@@ -162,6 +190,8 @@ for(var i = 8; i < 12; i++){
   console.log('-------------------------------');
   //console.log(b_checker[i].onSquare);
   all_checkers[index] = b_checker[i];
+  block[40 + i*2].ocupid = true;
+  block[40 + i*2].checkerId = b_checker[i];
 //  console.log(all_checkers[index].onSquare);
   console.log(all_checkers[index].id + '<--------------');
   index++;
@@ -195,6 +225,17 @@ console.log('KIRA ssaasa');
   //  highlightMoves(selectedChecker);
   return;
   }
+
+  //Переделать
+  for(var j = 0 ; j < 24; j++){
+    if(all_checkers[j].id == checkerId){
+      if(all_checkers[j].color != moveSide){
+        clearTable();
+        return;
+      }
+    }
+  }
+
   clearTable();
 console.log('d332324432324324423234');
   selectedChecker = checkerId;
@@ -215,6 +256,7 @@ console.log('d332324432324324423234');
   console.log('sssssssssssssssssssssss');
   inputMoves(i);
   checkMvs(all_checkers[i].onSquare);
+  checkSeveralCheckers();
   highlightMoves(selectedChecker);
 
 }
@@ -272,6 +314,8 @@ function checkMvs(index){
       downRightBool = false;
     }
   }
+
+
 }
 
 function highlightMoves(selectedChecker){
@@ -292,6 +336,109 @@ function highlightMoves(selectedChecker){
   downLeftBool = true;
   downRightBool = true;
 
+}
+
+function checkSeveralCheckers(){
+
+  console.log('nnnnnnnnnnnnnnnnnnnnnnn');
+  //console.log(moveDownLeft.ocupid);
+//  console.log(moveDownLeft.ocupid);
+//  console.log(moveDownLeft.ocupid);
+//  console.log(moveDownLeft.ocupid);
+  //Добавить для белых и для черных
+  if(downLeftBool == true) { if(block[moveDownLeft].ocupid == true) downLeftBool = false;}
+  if(downRightBool == true) { if(block[moveDownRight].ocupid == true) downRightBool = false;}
+  if(upLeftBool == true) { if(block[moveUpLeft].ocupid == true) upLeftBool = false;}
+  if(upRightBool == true) { if(block[moveUpRight].ocupid == true) upRightBool  = false;}
+
+}
+
+function makeMove(index){
+
+  console.log('ZDDDDDDDDDDESSSSSSSSS');
+  if(selectedChecker == undefined){
+    clearTable();
+    return;
+  }
+  if(index !=moveDownLeft && index !=moveDownRight  && index !=moveUpLeft  && index !=moveUpRight ){
+    selectedChecker = undefined;
+    selectedCheckerIndex = undefined;
+    clearTable();
+    return;
+  }
+
+  if(index == moveDownLeft && downLeftBool == true){
+  //    console.log(block[moveDownLeft].scoordX);
+  //    console.log(block[moveDownLeft].scoordY);
+    clearSquare();
+    all_checkers[selectedCheckerIndex].setCoordinate1(block[moveDownLeft].scoordX + 8, block[moveDownLeft].scoordY + 8);
+    all_checkers[selectedCheckerIndex].onSquare = index;
+    block[moveDownLeft].ocupid = true;
+    block[moveDownLeft].checkerId= selectedChecker;
+    clearTable();
+    if(moveSide == 'white'){moveSide = 'black';}
+    else{moveSide = 'white';}
+  }
+
+  if(index == moveDownRight && downRightBool == true){
+  //    console.log(block[moveDownRight].scoordX );
+  //    console.log(block[moveDownRight].scoordY);
+    clearSquare();
+    all_checkers[selectedCheckerIndex].setCoordinate1(block[moveDownRight].scoordX + 8, block[moveDownRight].scoordY + 8);
+    all_checkers[selectedCheckerIndex].onSquare = index;
+    block[moveDownRight].ocupid = true;
+    block[moveDownRight].checkerId= selectedChecker;
+    clearTable();
+    if(moveSide == 'white'){moveSide = 'black';}
+    else{moveSide = 'white';}
+  }
+
+  if(index == moveUpLeft && upLeftBool  == true){
+  //  console.log(block[moveUpLeft].scoordX);
+  //  console.log(block[moveUpLeft].scoordY);
+    clearSquare();
+    all_checkers[selectedCheckerIndex].setCoordinate1(block[moveUpLeft].scoordX + 8, block[moveUpLeft].scoordY + 8);
+    all_checkers[selectedCheckerIndex].onSquare = index;
+    block[moveUpLeft].ocupid = true;
+    block[moveUpLeft].checkerId= selectedChecker;
+    clearTable();
+    if(moveSide == 'white'){moveSide = 'black';}
+    else{moveSide = 'white';}
+  }
+
+  if(index == moveUpRight && upRightBool == true){
+  //  console.log(block[moveUpRight].scoordX);
+  //  console.log(block[moveUpRight].scoordY);
+    clearSquare();
+    all_checkers[selectedCheckerIndex].setCoordinate1(block[moveUpRight].scoordX + 8, block[moveUpRight].scoordY + 8);
+    all_checkers[selectedCheckerIndex].onSquare = index;
+    block[moveUpRight].ocupid = true;
+    block[moveUpRight].checkerId= selectedChecker;
+    clearTable();
+    if(moveSide == 'white'){moveSide = 'black';}
+    else{moveSide = 'white';}
+  }
+
+  upLeftBool = true;
+  upRightBool = true;
+  downLeftBool = true;
+  downRightBool = true;
+
+  moveDownLeft = -9;
+  moveDownRight = -7;
+  moveUpLeft = 7;
+  moveUpRight = 9;
+
+  return;
+}
+
+function clearSquare(){
+  for(var i = 0; i < 64; i++){
+    if(block[i].checkerId == selectedChecker){
+      block[i].checkerId = undefined;
+      block[i].ocupid = false;
+    }
+  }
 }
 
 function clearTable(){
@@ -316,6 +463,7 @@ function clearTable(){
     }
   }
 }
+
 
 /*
 for(var i = 0; i < 64; i++){

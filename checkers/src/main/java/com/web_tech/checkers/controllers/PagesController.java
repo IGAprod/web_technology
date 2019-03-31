@@ -1,4 +1,4 @@
-package controllers;
+package com.web_tech.checkers.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PagesController {
 
-    @GetMapping(value="/test")
+    @GetMapping(value="/")
     public String homepage(){
-        return "idex.html";
+        return "index.html";
     }
 
-    @GetMapping(value="/")
-    public String test(){
-        return "gmePage.html";
+    @GetMapping(value="/game")
+    public String game(){
+        return "gamePage.html";
     }
 
 }
